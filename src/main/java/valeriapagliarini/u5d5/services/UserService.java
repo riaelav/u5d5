@@ -4,8 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import valeriapagliarini.u5d5.entities.User;
+import valeriapagliarini.u5d5.exceptions.NotFoundException;
 import valeriapagliarini.u5d5.exceptions.ValidationException;
 import valeriapagliarini.u5d5.repositories.UserRepository;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -30,6 +33,18 @@ public class UserService {
 
         // log
         log.info("Utente" + newUser.getUsername() + "salvato correttamente");
+    }
+
+
+    //find all
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    //find by id custom
+    public User findById(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(userId));
     }
 
 

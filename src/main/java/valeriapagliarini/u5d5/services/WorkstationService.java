@@ -4,8 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import valeriapagliarini.u5d5.entities.Workstation;
+import valeriapagliarini.u5d5.exceptions.NotFoundException;
 import valeriapagliarini.u5d5.exceptions.ValidationException;
 import valeriapagliarini.u5d5.repositories.WorkstationRepository;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -40,6 +43,16 @@ public class WorkstationService {
         // 3. Log
         log.info("Postazione salvata con successo in edificio" + workstation.getBuilding().getBuildingName());
     }
+
+    public List<Workstation> findAll() {
+        return workstationRepository.findAll();
+    }
+
+    public Workstation findById(Long workstationId) {
+        return workstationRepository.findById(workstationId)
+                .orElseThrow(() -> new NotFoundException(workstationId));
+    }
+
 
 }
 
