@@ -8,9 +8,12 @@ import valeriapagliarini.u5d5.entities.Building;
 import valeriapagliarini.u5d5.entities.User;
 import valeriapagliarini.u5d5.entities.Workstation;
 import valeriapagliarini.u5d5.enums.WorkstationType;
+import valeriapagliarini.u5d5.services.BookingService;
 import valeriapagliarini.u5d5.services.BuildingService;
 import valeriapagliarini.u5d5.services.UserService;
 import valeriapagliarini.u5d5.services.WorkstationService;
+
+import java.time.LocalDate;
 
 @Component
 @Slf4j
@@ -23,6 +26,8 @@ public class Runner implements CommandLineRunner {
     private BuildingService buildingService;
     @Autowired
     private WorkstationService workstationService;
+    @Autowired
+    private BookingService bookingService;
 
 
     @Override
@@ -68,12 +73,26 @@ public class Runner implements CommandLineRunner {
         Workstation ws5 = new Workstation("Winterfell Strategy Desk", WorkstationType.PRIVATE, 2, winterfell);
         Workstation ws6 = new Workstation("Dragonpit Arena", WorkstationType.OPENSPACE, 100, redKeep);
 
-        workstationService.saveWorkstation(ws1);
+      /*  workstationService.saveWorkstation(ws1);
         workstationService.saveWorkstation(ws2);
         workstationService.saveWorkstation(ws3);
         workstationService.saveWorkstation(ws4);
         workstationService.saveWorkstation(ws5);
-        workstationService.saveWorkstation(ws6);
+        workstationService.saveWorkstation(ws6);*/
+
+
+        User daemon = userService.findById(1L);
+        User rhaenyra = userService.findById(2L);
+        User alicent = userService.findById(3L);
+
+        Workstation room = workstationService.findById(1L);
+        Workstation observatory = workstationService.findById(2L);
+        Workstation office = workstationService.findById(3L);
+
+
+        bookingService.createBooking(daemon, room, LocalDate.now().plusDays(1));
+        bookingService.createBooking(rhaenyra, observatory, LocalDate.now().plusDays(2));
+        bookingService.createBooking(alicent, office, LocalDate.now().plusDays(3));
 
 
     }
