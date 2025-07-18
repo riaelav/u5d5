@@ -6,8 +6,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import valeriapagliarini.u5d5.entities.Building;
 import valeriapagliarini.u5d5.entities.User;
+import valeriapagliarini.u5d5.entities.Workstation;
+import valeriapagliarini.u5d5.enums.WorkstationType;
 import valeriapagliarini.u5d5.services.BuildingService;
 import valeriapagliarini.u5d5.services.UserService;
+import valeriapagliarini.u5d5.services.WorkstationService;
 
 @Component
 @Slf4j
@@ -18,6 +21,8 @@ public class Runner implements CommandLineRunner {
     private UserService userService;
     @Autowired
     private BuildingService buildingService;
+    @Autowired
+    private WorkstationService workstationService;
 
 
     @Override
@@ -48,6 +53,27 @@ public class Runner implements CommandLineRunner {
         buildingService.saveBuilding(building3);
         buildingService.saveBuilding(building4);
         buildingService.saveBuilding(building5);*/
+
+//recupero dati dal db
+        Building redKeep = buildingService.findById(1L);
+        Building dragonstone = buildingService.findById(2L);
+        Building driftmark = buildingService.findById(3L);
+        Building castleBlack = buildingService.findById(4L);
+        Building winterfell = buildingService.findById(5L);
+
+        Workstation ws1 = new Workstation("Strategic War Room", WorkstationType.MEETING_ROOM, 12, redKeep);
+        Workstation ws2 = new Workstation("Dragonstone Observatory", WorkstationType.OPENSPACE, 6, dragonstone);
+        Workstation ws3 = new Workstation("Corlys' Private Office", WorkstationType.PRIVATE, 1, driftmark);
+        Workstation ws4 = new Workstation("Castle Black Training Hall", WorkstationType.MEETING_ROOM, 10, castleBlack);
+        Workstation ws5 = new Workstation("Winterfell Strategy Desk", WorkstationType.PRIVATE, 2, winterfell);
+        Workstation ws6 = new Workstation("Dragonpit Arena", WorkstationType.OPENSPACE, 100, redKeep);
+
+        workstationService.saveWorkstation(ws1);
+        workstationService.saveWorkstation(ws2);
+        workstationService.saveWorkstation(ws3);
+        workstationService.saveWorkstation(ws4);
+        workstationService.saveWorkstation(ws5);
+        workstationService.saveWorkstation(ws6);
 
 
     }
