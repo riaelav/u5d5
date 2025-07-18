@@ -14,7 +14,7 @@ public class BookingService {
     @Autowired
     private BookingRepository bookingRepository;
 
-    //TODO!!! metodo per salvare le prenotazioni 
+    //TODO!!! metodo per salvare le prenotazioni
 
 
     //find all

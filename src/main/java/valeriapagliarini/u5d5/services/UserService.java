@@ -32,7 +32,7 @@ public class UserService {
         userRepository.save(newUser);
 
         // log
-        log.info("Utente" + newUser.getUsername() + "salvato correttamente");
+        log.info("Utente  " + newUser.getUsername() + "   salvato correttamente");
     }
 
 
