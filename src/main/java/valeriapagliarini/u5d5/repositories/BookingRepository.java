@@ -6,12 +6,12 @@ import valeriapagliarini.u5d5.entities.User;
 import valeriapagliarini.u5d5.entities.Workstation;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Optional;
 
 public interface BookingRepository extends JpaRepository<Booking, Long> {
 
-    List<Booking> findByUserAndBookingDate(User user, LocalDate date);
+    Optional<Booking> findByUserAndBookingDate(User user, LocalDate date);
 
-    List<Booking> findByWorkstationAndBookingDate(Workstation workstation, LocalDate date);
+    Optional<Booking> findByWorkstationAndBookingDate(Workstation workstation, LocalDate date);
 }
 
